@@ -40,5 +40,5 @@ We use Ansible extensively to perform various automation: (https://www.ansible.c
 ## H2 Need Help?
 We work as a team and are happy to answer any questions that may arise during this assignment. Whether it's clarification of the objectives or specific tools and technologies that could be used, please reach out to the contact that was provided to you when we gave you this assignment.
 
-Copyright / Disclaimer
+## H2 Copyright / Disclaimer
 © 2021 Copperleaf Technologies Inc. COPPERLEAF, the COPPERLEAF logo, COPPERLEAF PORTFOLIO, COPPERLEAF ASSET, and COPPERLEAF VALUE are trademarks of Copperleaf Technologies Inc. COPPERLEAF is a registered trademark in Canada, the U.S., the E.U., and other countries. The COPPERLEAF logo is a registered trademark in Canada, the U.S., and the E.U. All rights reserved.
