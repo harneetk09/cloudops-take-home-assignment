@@ -30,7 +30,7 @@ Link to the various assets and resources included in this repo.
 
 Include any relevant data models and structures.
 
-## H2 Additional Suggestions
+## Additional Suggestions
 Ngrok offers a reverse proxy that publishes a public URL: https://ngrok.com
 
 Docker can be used to run an application, logically separating the process from the host infrastructure: https://docs.docker.com/get-docker/
