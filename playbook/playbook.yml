@@ -1,0 +1,65 @@
+- name: Deploy a WebApp from Github to Docker Container 
+  hosts: localhost
+  connection: local
+  vars_files:
+     - secrets.yml
+  vars:
+     - destdir: /Users/Ishmeet/Desktop/harneet_assignment/WebApp
+  tasks:
+
+     - name: Download the WebApp from the GitRepo
+       become: yes
+       git:
+          repo: 'https://{{gituser}}:{{gitpass}}@github.com/harneetk09/cloudops-take-home-assignment.git'
+          dest: "{{ destdir }}"
+
+     - name: Install Docker
+       homebrew_cask:
+        name: "docker"
+        state: present
+       register: result
+       until: result is successful
+
+     - name: Install Docker sdk for python
+       pip:
+        name: docker
+
+     - name: Start Docker
+       shell: open /Applications/Docker.app
+
+     - name: Pull httpd docker image
+       docker_image:
+        name: httpd
+        tag: latest
+        source: pull
+
+     - name: Run docker container
+       docker_container:
+          name: WebServer
+          image: httpd:latest
+          state: started
+          exposed_ports:
+          - "80"
+          ports:
+          - "80:80"
+          volumes:
+          - '{{ destdir }}:/usr/local/apache2/htdocs/'
+
+     - debug: msg="Server running now !"
+
+     - name: Install ngrok
+       homebrew_cask:
+        name: "ngrok"
+        state: present
+       register: result
+       until: result is successful
+
+     - name: Setup reverse proxy
+       shell: ngrok http 80 -log=stdout>ngrok.log &
+
+     - name: Extract URL from logfile
+       shell: grep -o 'https.*' -m 2 ngrok.log
+       register: ps
+
+     - debug: msg="{{ ps.stdout }}/default.htm"
+
